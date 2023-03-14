@@ -1,0 +1,175 @@
+{
+  "easycom": {
+    "^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+  },
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 普通用户路由
+    {
+      "path": "pages/user/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/home-page/index", // 首页
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/order-page/index", // 订单
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/cycling-page/index", // 骑行
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/my-page/index", // 我的
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/my-page/invest-record/index", // 我的-充值记录
+      "style": {
+        "navigationBarTitleText": "充值记录",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/user/my-page/payment-record/index", // 我的-支付记录
+      "style": {
+        "navigationBarTitleText": "支付记录",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/user/my-page/journey-record/index", // 我的-行程记录
+      "style": {
+        "navigationBarTitleText": "行程记录",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    // 管理员路由
+    {
+      "path": "pages/admin/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/admin/statistics-page/index", // 统计
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/admin/device-page/index", // 设备管理
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/admin/my-page/index", // 我的
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/admin/my-page/user-page/index", // 我的-用户管理
+      "style": {
+        "navigationBarTitleText": "用户管理",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/admin/my-page/overall-page/index", // 我的-全局配置
+      "style": {
+        "navigationBarTitleText": "全局配置",
+        "app-plus": {
+          "titleNView": {
+            "type": "default"
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/admin/fault-page/index", // 故障
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+	{
+	  "path": "pages/admin/fault-page/bike-page/index", // 速度光照查询
+	  "style": {
+	    "navigationBarTitleText": "速度光照查询",
+	    "app-plus": {
+	      "titleNView": {
+	        "type": "default"
+	      }
+	    }
+	  }
+	},
+	{
+	  "path": "pages/admin/fault-page/battery-page/index", // 电池数据查询
+	  "style": {
+	    "navigationBarTitleText": "电池数据查询",
+	    "app-plus": {
+	      "titleNView": {
+	        "type": "default"
+	      }
+	    }
+	  }
+	},
+	{
+	  "path": "pages/admin/fault-page/order-page/index", // 用户订单查询
+	  "style": {
+	    "navigationBarTitleText": "用户订单查询",
+	    "app-plus": {
+	      "titleNView": {
+	        "type": "default"
+	      }
+	    }
+	  }
+	},
+    {
+      "path": "pages/admin/data-page/index", // 数据
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}
