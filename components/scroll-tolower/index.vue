@@ -263,3 +263,33 @@
     },
   }
 </script>
+<style lang="scss" scoped>
+  .scroll-tolower {
+    height: 100%;
+    .skeleton {
+      padding: 40rpx 40rpx !important;
+    }
+
+    .scroll-Y {
+      height: 100%;
+      .box-buttom {
+        display: flex;
+      }
+
+      .empty-container {
+        display: flex;
+        flex-direction: column;
+        margin: 60rpx;
+        text-align: center;
+
+        image {
+          margin: auto;
+        }
+      }
+    }
+
+    ::v-deep .u-loadmore__content__text {
+      line-height: unset !important;
+    }
+  }
+</style>
