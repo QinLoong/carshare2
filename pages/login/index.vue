@@ -68,5 +68,52 @@
         pwdShow: false,
         isLogin: true
       }
+    },
+    onReady() {
+        // 表单验证
+      this.$refs.loginForm.setRules(this.rules)
+    },
+    watch: {
+      isLogin() {
+        Object.assign(this.loginInfo, this.$options.data.call(this).loginInfo)
+      }
+    },
+    mounted(){
+       // this.submit()
+    },
+    methods: {
+      submit() {
+        this.$refs.loginForm
+          .validate()
+          .then(async res => {
+            const msg = this.isLogin ? '登录': '注册'
+            try {
+              const res = await this.$store.dispatch('login', {...this.loginInfo, isLogin: this.isLogin} )
+              if (res) {
+                this.$toast.success(`${msg}成功!`)
+                setTimeout(() => {
+                  uni.redirectTo({
+                    url: res.role === '2' ? '/pages/user/index' : '/pages/admin/index'
+                  })
+                }, 600);
+                var app= getApp();
+                app.globalData=this.loginInfo;
+                console.log(app.globalData);
+              } else {
+                this.$toast.error(`${msg}失败!`)
+              }
+            } catch (e) {
+              uni.$u.toast(`${msg}失败`)
+            }
+          })
+          .catch(errors => {})
+      },
+      focusHandle(key) {
+        this[key + 'Focus'] = true
+      },
+      blurHandle(key) {
+        this[key + 'Focus'] = false
+      }
     }
-}
+  }
+  </script>
