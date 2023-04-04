@@ -55,3 +55,20 @@
     }
   }
   </script>
+  
+  <style lang="scss" scoped>
+  .home-page {
+    height: 100vh;
+    background-color: $app-background-grey;
+    .search-box {
+      background: #fff;
+      height: 70rpx;
+      line-height: 70rpx;
+      padding-left: 20rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  </style>
+  
