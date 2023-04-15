@@ -17,6 +17,17 @@
 									<view style="margin-left: 130rpx;margin-top: -45rpx;">{{item.start_time}}</view>
 								</view>
 							</view>
+							<view slot="value" class="order-value">
+								<view style="margin-top: -40rpx;">
+									<view style="margin-bottom: 15rpx;">金额：{{item.money}}</view>
+									<view class="order-payment" v-if="true"> 用户名：{{item.user_name}} </view>
+									
+									<view style="margin-top: 25rpx;">
+										<u-tag text="结束时间" plain size="mini" type="error" style="width: 120rpx;"></u-tag>
+										<view style="margin-left: 130rpx;margin-top: -45rpx;">{{item.end_time}}</view>
+									</view>
+								</view>
+							</view>
 						</u-cell>
 					</u-cell-group>
 
@@ -67,6 +78,32 @@
 						console.error('请求失败:', error);
 					},
 				});
+			},
+			dictDisplay,
+			async findOrderList({
+				page,
+				size
+			}, handleRequest) {
+				try {
+					const res = await findOrderList({
+						userId: this.userId
+					})
+					if (res.code === 200) {
+						this.orderList = handleRequest(res.data.slice((page - 1) * size, page * size), res.data.length)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			navTo(url, order) {
+				const toUrl = order.status === '1' ? `${url}?page=homePage&orderId=${order.id}&id=${order.device_id}` :
+					`${url}?page=orderPage&orderId=${order.id}&id=${order.device_id}`
+				uni.navigateTo({
+					url: toUrl
+				})
 			}
-			
+		}
+	}
 </script>
