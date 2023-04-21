@@ -119,7 +119,222 @@
 			}
 		},
 		methods: {
+			// 更新分页器的当前页
+			sectionChange2(index) {
+				// console.log(index);
+				this.currentPage2 = index.current;
+				console.log('this.currentPage2: ',this.currentPage2);
+			   // 每当分页器的当前页变化时，重新获取数据
+			   this.findData1List2()
+			   
+			},
+			// 更新分页器的当前页
+			sectionChange(index) {
+				// console.log(index);
+				this.currentPage = index.current;
+				// console.log('this.currentValue: ',this.currentValue);
+			   // 每当分页器的当前页变化时，重新获取数据
+			   this.findData1List()
+			   
+			},
+			// 获取数据
+			findData1List2() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl+'/data1/findData1List',
+					method: 'POST',
+					data: {
+						page: this.currentPage2,
+						size: this.pageSize,
+						bike_id:2
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						// const data = res.data;
+						this.sandl2 = data.data.records || [];
+						const total = Math.ceil(data.data.total/this.pageSize) || 0
+						this.totalPage2=total*10
+						// console.log(data.data.total);
+						this.listValue2 = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.batteryList1);
+						// this.hasMore = data.hasMore || false;
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			// getData3(){
+			// 	// 向后端请求数据
+			// 	uni.request({
+			// 		url: this.$global.baseUrl+'/data1/getAllData1',
+			// 		method: 'POST',
+			// 		success: (res) => {
+			// 				// this.batteryList1 = res.data.data;
+			// 				const data = res.data.data;
+			// 				const total=Math.ceil(data.length/this.pageSize)
+			// 				// console.log(total);
+			// 				this.totalPage=total*10
+			// 				// console.log(this.totalPage);
+			// 				this.listValue = Array.from({
+			// 					length: total
+			// 				}, (v, k) => ({
+			// 					name: `第${k + 1}页`,
+			// 				}));
+			// 				// console.log(this.listValue);
+			// 				this.findData1List();
+			// 		},
+			// 		fail: (error) => {
+			// 			console.error('请求失败:', error);
+			// 		},
+			// 	});
+			// },
+			// 获取数据
+			findData1List() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl+'/data1/findData1List',
+					method: 'POST',
+					data: {
+						page: this.currentPage,
+						size: this.pageSize,
+						bike_id:1
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						// const data = res.data;
+						this.sandl = data.data.records || [];
+						const total = Math.ceil(data.data.total/this.pageSize) || 0
+						this.totalPage=total*10
+						// console.log(this.totalPage);
+						this.listValue = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.batteryList1);
+						// this.hasMore = data.hasMore || false;
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			toggleTable() {
+				this.showTable = !this.showTable; // 切换showTable的值来控制表格的显示与隐藏
+			},
+			toggleTable2() {
+				this.showTable = !this.showTable; // 切换showTable的值来控制表格的显示与隐藏
+			},
+			toggleTable3() {
+				this.showIndex = !this.showIndex; // 切换showTable的值来控制表格的显示与隐藏
+			},
+			getData1() {
+				uni.request({
+					url: this.$global.baseUrl+"/data1/getData1",
+					method: "POST",
+					success: (res) => {
+						const data1 = res.data.data;
+						// this.sandl= data1;
+						// console.log('data:',data1);
+						// 使用浅拷贝，避免修改原始数据
+						const sortedData = [...data1].sort((a, b) => a.id - b.id);
+						// console.log('sandl:',this.sandl);
+						// 对接收到的数据按ID从小到大排序
+						// data1.sort((a, b) => a.id - b.id);
+						// this.sandl= data;		
+					    // console.log('data:',data1);
+						const categories = [];
+						const dataSpeed= [];
+						const dataLight = [];
 			
+						sortedData.forEach((item) => {
+							categories.push(item.time);
+							dataSpeed.push(item.speed);
+							dataLight.push(item.light);
+						});
+			
+						this.lineData2 = {
+							categories,
+							series: [{
+									name: '电车速度',
+									data: dataSpeed
+								},
+								{
+									name: '光照',
+									data: dataLight
+								}
+							],
+						};
+						this.$forceUpdate();
+					},
+					fail: (err) => {
+						console.error("获取后端数据出错:", err);
+					},
+				});
+			},
+			getData2() {
+				uni.request({
+					// url: "http://127.0.0.1:3000/data",
+					url: this.$global.baseUrl+"/data1/getData2",
+					method: "POST",
+					success: (res) => {
+						const data = res.data.data;
+						// this.sandl2= data;
+						const sortedData = [...data].sort((a, b) => a.id - b.id);
+						// console.log(data);
+						// 对接收到的数据按ID从小到大排序
+						// data.sort((a, b) => a.id - b.id);
+			   //          this.sandl2= data;
+						const categories = [];
+						const dataSpeed= [];
+						const dataLight = [];
+			
+						sortedData.forEach((item) => {
+							categories.push(item.time);
+							dataSpeed.push(item.speed);
+							dataLight.push(item.light);
+						});
+			
+						this.lineData3 = {
+							categories,
+							series: [{
+									name: '电车速度',
+									data: dataSpeed
+								},
+								{
+									name: '光照',
+									data: dataLight
+								}
+							],
+						};
+						this.$forceUpdate();
+					},
+					fail: (err) => {
+						console.error("获取后端数据出错:", err);
+					},
+				});
+			},
+	    },		
+		mounted(){
+			this.findData1List2()
+			this.findData1List()
+			this.getData1();
+			this.getData2();
+			// this.getData3();
+			setInterval(() => {
+				this.getData1();
+				this.getData2();
+				this.findData1List2();
+				this.findData1List();
+				// this.getData3();
+			}, 3000);
+		}	
 	}
-}
 </script>
