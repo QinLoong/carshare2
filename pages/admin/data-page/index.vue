@@ -338,3 +338,138 @@
 		}	
 	}
 </script>
+<style scoped lang="scss">
+	.title-king {
+		color: #63a4ff;
+		text-align: center;
+		// text-shadow: 0 0 0.1em, 0 0 0.3em;
+	}
+
+	.body {
+		height: 100vh;
+		margin: 0;
+		padding: 0 20rpx;
+		font-family: 'montserrat';
+		background-image: linear-gradient(#83eaf1, #63a4ff);
+		background-size: 400%;
+		animation: bganimation 15s infinite;
+	}
+
+	li {
+		list-style-type: none;
+	}
+
+	page,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.window {
+		height: 100vh;
+		overflow: hidden;
+
+		.topLine {
+			width: 100%;
+		}
+
+		scroll-view {
+			box-sizing: border-box;
+		}
+
+		.swiper {
+			box-sizing: border-box;
+		}
+
+		.nav {
+			background-size: 100% 100%;
+
+			.back {
+				font-size: 54rpx;
+				padding: 20rpx 14rpx 15rpx 14rpx;
+				color: #fff;
+			}
+
+			.title {
+				color: #fff;
+				font-size: 30rpx;
+				flex: 1;
+				text-align: center;
+			}
+
+			.hidden {
+				visibility: hidden;
+			}
+		}
+
+		.head {
+			padding: 0 16rpx 14rpx 16rpx;
+			color: #fff;
+			background-color: #40a2ed;
+			justify-content: space-between;
+			font-size: 26rpx !important;
+
+			.calendar_drag {
+				width: 340rpx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.calendar_name {
+					margin-right: 10rpx;
+				}
+
+				.icon-calendar {
+					font-size: 26rpx;
+					margin-top: 4rpx;
+				}
+			}
+		}
+
+		.data_body {
+			overflow: auto;
+			text-align: center;
+			color: #333333;
+			background-repeat: repeat;
+			height: 100%;
+
+			.scroll_list {
+				.view_block {
+					background-color: #fff;
+					padding: 16rpx 20rpx 10rpx 20rpx;
+					border-radius: 20rpx;
+					margin-bottom: 40rpx;
+
+					.title {
+						text-align: left;
+						margin-bottom: 30rpx;
+						font-size: 30rpx;
+					}
+
+					.trend_title {
+						text-align: right;
+						font-size: 22rpx;
+						color: #ff9900;
+						margin-top: 50rpx;
+					}
+				}
+			}
+		}
+	}
+
+	@keyframes bganimation {
+		0% {
+			background-position: 0% 50%;
+		}
+
+		50% {
+			background-position: 100% 50%;
+		}
+
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+</style>
