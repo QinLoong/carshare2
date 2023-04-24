@@ -26,7 +26,34 @@
 </u-collapse-item>
 </u-collapse>
 	</view>
+	<u-collapse-item :title="`订单列表（共${orderList.length}条）`">
+						<view>
+							<u-cell title="订单1号" v-for="item in orderList" :key="item.id">
+								<view slot="title" class="u-slot-title">
+									<view style="margin-bottom: 15rpx;">订单号：{{item.id}}</view>
+									<view class="order-payment" v-if="true"> 电车号：{{item.bike_number}} </view>
+							
+									<view style="margin-top: 25rpx;">
+										<u-tag text="开始时间" plain size="mini" type="success" style="width: 120rpx;"></u-tag>
+										<view style="margin-left: 130rpx;margin-top: -45rpx;">{{item.start_time}}</view>
+									</view>
+								</view>
+								<view slot="value" class="order-value">
+									<view style="margin-top: -6rpx;">
+										<view style="margin-bottom: 15rpx;">金额：{{item.money}}</view>
+										<view class="order-payment" v-if="true"> 用户名：{{item.user_name}} </view>
+										
+										<view style="margin-top: 25rpx;">
+											<u-tag text="结束时间" plain size="mini" type="error" style="width: 120rpx;"></u-tag>
+											<view style="margin-left: 130rpx;margin-top: -45rpx;">{{item.end_time}}</view>
+										</view>
+									</view>
+								</view>
+							</u-cell>
+						</view>
+						</u-collapse-item>
 </template>
+
 
 <script name="dataRecord">
 	import {
