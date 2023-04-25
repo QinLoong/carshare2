@@ -103,5 +103,91 @@
 				listValue: [], // 存储分段器的选项
 				pageSize: 6, // 分页大小，每页显示的记录数
 				hasMore: false, // 是否还有更多数据
+				totalPage: 1,
+				currentPage: 1,
+				alertList: [],
+				alertLength:0
 			}
 		},
+		mounted() {
+			this.getAllOrder1()
+			// n秒请求一次
+			// this.interval = setInterval(() => {
+			//   this.$refs.scrollTolowerRef.resetRequest()
+			// }, this.time)
+			this.getAllAlert(),
+			setInterval(()=>{
+				this.getAllAlert()
+			},3000)
+		},
+		getAllAlert() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/alert/getAllAlert',
+					method: 'POST',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						const data = res.data.data;
+						this.alertLength = data.length
+						const total = Math.ceil(data.length / this.pageSize)
+						// console.log(total);
+						this.totalPage = total * 10
+						// console.log(this.totalPage);
+						this.listValue = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.listValue);
+						this.findAlertList();
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			getAllOrder1() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/order1/getAllOrder1',
+					method: 'POST',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						this.orderList = res.data.data;
+						this.total=this.orderList.length
+						console.log(this.orderList);
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			async findDataList({
+				page,
+				size
+			}, handleRequest) {
+				console.log('3. 数据实时数据更新---')
+				try {
+					const res = await findDataList({
+						page,
+						size
+					})
+					if (res.code === 200) {
+						this.total = res.data.total
+						const data = res.data.records.map(v => dataDisplay(v))
+						console.log(data)
+						this.dataList = handleRequest(data, res.data.total)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			}
+		},
+		destroyed() {
+			// clearInterval(this.interval)
+			// this.interval = null
+		}
+	}
+</script>
