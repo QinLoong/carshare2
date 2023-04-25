@@ -8,25 +8,22 @@
 				</view>
 				<view class="data-list">
 					<u-cell-group :title="`数据列表`" :border="false">
-            </u-cell-group>
-				</view>
-			</template>
-		</ScrollTolower>
-		<u-collapse-item v-for="data in dataList" :key="data.id" :title="`【${data.A1}】`" :label="$format(data.ctime)">
+						<!-- <u-collapse>
+              <u-collapse-item v-for="data in dataList" :key="data.id" :title="`【${data.A1}】`" :label="$format(data.ctime)">
 
-<view slot="title" :style="{ color: data.D1 == 0 ? '#5ac725' : '#f56c6c', display: 'flex' }">
-  {{ `【${data.A1}】` }}
-  <text v-if="data.D1 != 0">{{ vStatus[data.D1] }}</text>
-  <u-tag v-if="data.connection" text="重连数据" plain size="mini" style="width: 130rpx"></u-tag>
-</view>
-
-<view>
-  <dataInfo :data="data"></dataInfo>
-</view>
-</u-collapse-item>
-</u-collapse>
-	</view>
-	<u-collapse-item :title="`订单列表（共${orderList.length}条）`">
+                <view slot="title" :style="{ color: data.D1 == 0 ? '#5ac725' : '#f56c6c', display: 'flex' }">
+                  {{ `【${data.A1}】` }}
+                  <text v-if="data.D1 != 0">{{ vStatus[data.D1] }}</text>
+                  <u-tag v-if="data.connection" text="重连数据" plain size="mini" style="width: 130rpx"></u-tag>
+                </view>
+                
+                <view>
+                  <dataInfo :data="data"></dataInfo>
+                </view>
+              </u-collapse-item>
+            </u-collapse> -->
+			<u-collapse >
+			 <u-collapse-item :title="`订单列表（共${orderList.length}条）`">
 						<view>
 							<u-cell title="订单1号" v-for="item in orderList" :key="item.id">
 								<view slot="title" class="u-slot-title">
@@ -52,6 +49,33 @@
 							</u-cell>
 						</view>
 						</u-collapse-item>
+						<u-collapse-item name="Docs guide">
+							<view slot="title" class="device-title">
+								<!-- <u-tag text="电池" plain size="mini" style="margin-right: 20rpx"></u-tag> -->
+								<text> 警告列表（共{{alertLength}}条）</text>
+							</view>
+							<u-table class="uitable">
+								<u-tr class="u-tr">
+									<u-th class="u-th">ID</u-th>
+									<u-th class="u-th">警告信息</u-th>
+									<u-th class="u-th">时间</u-th>
+						
+								</u-tr>
+								<u-tr class="u-tr" v-for="item in alertList" :key="item.id">
+									<u-td class="u-td">{{ item.id }}</u-td>
+									<u-td class="u-td">{{ item.message }}</u-td>
+									<u-td class="u-td">{{ item.time }}</u-td>
+								</u-tr>
+							</u-table>
+							<uni-pagination :show-icon="true" :total="totalPage" :current="currentPage"
+								@change="sectionChange" />
+						</u-collapse-item>
+					  </u-collapse>	
+					</u-cell-group>	
+				</view>
+			</template>
+		</ScrollTolower>
+	</view>
 </template>
 
 
