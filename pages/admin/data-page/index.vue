@@ -8,7 +8,7 @@
 				</view>
 				<view class="data-list">
 					<u-cell-group :title="`数据列表`" :border="false">
-						<u-collapse>
+						<!-- <u-collapse>
               <u-collapse-item v-for="data in dataList" :key="data.id" :title="`【${data.A1}】`" :label="$format(data.ctime)">
 
                 <view slot="title" :style="{ color: data.D1 == 0 ? '#5ac725' : '#f56c6c', display: 'flex' }">
@@ -21,7 +21,7 @@
                   <dataInfo :data="data"></dataInfo>
                 </view>
               </u-collapse-item>
-            </u-collapse>
+            </u-collapse> -->
 			<u-collapse >
 			 <u-collapse-item :title="`订单列表（共${orderList.length}条）`">
 						<view>
