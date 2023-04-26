@@ -8,7 +8,7 @@
 				</view>
 				<view class="data-list">
 					<u-cell-group :title="`数据列表`" :border="false">
-						<!-- <u-collapse>
+						<u-collapse>
               <u-collapse-item v-for="data in dataList" :key="data.id" :title="`【${data.A1}】`" :label="$format(data.ctime)">
 
                 <view slot="title" :style="{ color: data.D1 == 0 ? '#5ac725' : '#f56c6c', display: 'flex' }">
@@ -21,7 +21,7 @@
                   <dataInfo :data="data"></dataInfo>
                 </view>
               </u-collapse-item>
-            </u-collapse> -->
+            </u-collapse>
 			<u-collapse >
 			 <u-collapse-item :title="`订单列表（共${orderList.length}条）`">
 						<view>
@@ -77,8 +77,6 @@
 		</ScrollTolower>
 	</view>
 </template>
-
-
 <script name="dataRecord">
 	import {
 		findDataList
@@ -120,7 +118,39 @@
 				this.getAllAlert()
 			},3000)
 		},
-		getAllAlert() {
+		methods: {
+			findAlertList() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/alert/findAlertList',
+					method: 'POST',
+					data: {
+						page: this.currentPage,
+						size: this.pageSize
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						// const data = res.data;
+						this.alertList = data.data.records || [];
+						// console.log(this.batteryList1);
+						// this.hasMore = data.hasMore || false;
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			// 更新分页器的当前页
+			sectionChange(index) {
+				// console.log(index);
+				this.currentPage = index.current;
+				// console.log('this.currentValue: ',this.currentValue);
+				// 每当分页器的当前页变化时，重新获取数据
+				this.findAlertList()
+			
+			},
+			getAllAlert() {
 				// 向后端请求数据
 				uni.request({
 					url: this.$global.baseUrl + '/alert/getAllAlert',
