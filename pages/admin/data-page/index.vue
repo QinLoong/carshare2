@@ -221,3 +221,45 @@
 		}
 	}
 </script>
+<style lang="scss" scoped>
+	.data-record-container {
+		height: calc(100vh - 90rpx);
+		
+        .order-payment {
+        	display: flex;
+        	align-items: flex-end;
+        
+        	::v-deep .u-icon__icon,
+        	& {
+        		color: $uni-color-primary !important;
+        	}
+        }
+		.data-image {
+			width: 100%;
+			height: 300rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: linear-gradient($color1, $color2);
+
+			image {
+				padding: 30rpx;
+				width: 210rpx;
+				height: 70%;
+				margin: auto;
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 50%;
+			}
+		}
+
+		.data-value {
+			color: $uni-color-primary;
+		}
+
+		::v-deep {
+			.u-cell-group__title {
+				background: $app-background-grey;
+			}
+		}
+	}
+</style>
