@@ -31,7 +31,11 @@
 
 								<!-- 父设备信息 -->
 								<view class="info-box" style="margin-bottom: 20rpx">
-									
+									<!-- 添加子设备 -->
+									<u-button v-if="device.type === '1'" style="width: 160rpx; width: 80px; margin: 0; float: right" plain type="success" size="mini" @click="subDeviceOpen(device.id)">添加子设备</u-button>
+									<u-button v-if="device.type === '1'"
+										style="width: 160rpx; width: 80px; margin: 0; float: right" plain type="error"
+										size="mini" @click="delBike(device.id)">删除设备</u-button>
 									<view class="box-title">设备信息</view>
 									<u-cell-group :border="false" class="cell-group">
 										<u-cell title="设备名" :value="device.device_name" :arrow="false"></u-cell>
