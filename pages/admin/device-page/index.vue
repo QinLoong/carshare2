@@ -108,6 +108,91 @@
 										
 									</u-cell-group>
 								</view>
+                                				<!-- 子设备列表 -->
+								<view class="info-box">
+									<view class="box-title">子设备列表</view>
+									<u-cell-group :isLink="false" disabled :border="false" v-if="device.battery_id==1">
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="error" text="电池编号" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{battery1.number}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="电池电量" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<u-line-progress :percentage="battery1.power*100"
+													height="18"></u-line-progress>
+											</view>
+											<view slot="value">{{battery1.power*100+'%'}}</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="电池电压" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery1.v1+'V'}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="充放电流" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery1.i+'A'}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="工作温升" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery1.t+'度'}} </text>
+											</view>
+										</u-cell>
+									</u-cell-group>
+									
+									
+									<u-cell-group :isLink="false" disabled :border="false" v-else>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="error" text="电池编号" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{battery2.number}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="电池电量" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<u-line-progress :percentage="battery2.power*100"
+													height="18"></u-line-progress>
+											</view>
+											<view slot="value">{{battery2.power*100+'%'}}</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="电池电压" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery2.v1+'V'}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="充放电流" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery2.i+'A'}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="primary" text="工作温升" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+										        <text>{{battery2.t+'度'}} </text>
+											</view>
+										</u-cell>
+									</u-cell-group>
+								</view>
+
 		</ScrollTolower>
                     </view>
                 </template>
