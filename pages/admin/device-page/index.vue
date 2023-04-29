@@ -68,7 +68,46 @@
 										<u-cell title="创建时间" :value="$format(device.ctime)" :arrow="false"></u-cell>
 									</u-cell-group>
 								</view>
-			</template>
+			</template>        <!-- 指令列表 -->
+								<view class="info-box" style="margin-bottom: 20rpx">
+									<view class="box-title">数据列表</view>
+									<!-- <DirectiveList :directiveList="directiveList.filter(i => i.directive == device.id)"
+										:deviceNumber="device.number" @reset="reset"></DirectiveList> -->
+									<u-cell-group :border="false" class="cell-group" v-if="device.number==1">
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="warning" text="当前车速" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{bike1.speed}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="warning" text="当前光照" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{bike1.light}} </text>
+											</view>
+										</u-cell>
+										
+									</u-cell-group>
+									<u-cell-group :border="false" class="cell-group" v-if="device.number==2">
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="warning" text="当前车速" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{bike2.speed}} </text>
+											</view>
+										</u-cell>
+										<u-cell :arrow="false">
+											<view slot="title" class="device-title">
+												<u-tag type="warning" text="当前光照" plain size="mini"
+													style="margin-right: 20rpx"></u-tag>
+												<text>{{bike2.light}} </text>
+											</view>
+										</u-cell>
+										
+									</u-cell-group>
+								</view>
 		</ScrollTolower>
                     </view>
                 </template>
