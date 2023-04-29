@@ -192,7 +192,35 @@
 										</u-cell>
 									</u-cell-group>
 								</view>
+                                <u-collapse-item name="Docs guide">
+								<view slot="title" class="device-title">
+									<u-tag text="电池" plain size="mini" style="margin-right: 20rpx"></u-tag>
+									<text> 实时电池数据</text>
+								</view>
+								<u-table class="uitable">
+									<u-tr class="u-tr">
+										<u-th class="u-th">电池ID</u-th>
+										<u-th class="u-th">电量</u-th>
+										<u-th class="u-th">工作温升</u-th>
+										<u-th class="u-th">电压</u-th>
+										<u-th class="u-th">充放电流</u-th>
+										<u-th class="u-th">实时</u-th>
+										<u-th class="u-th" width="128rpx">时间</u-th>
 
+									</u-tr>
+									<u-tr class="u-tr" v-for="item in batteryList1" :key="item.id">
+										<u-td class="u-td">{{ item.number }}</u-td>
+										<u-td class="u-td">{{ item.power*100+'%' }}</u-td>
+										<u-td class="u-td">{{ item.t }}</u-td>
+										<u-td class="u-td">{{ item.v1 }}</u-td>
+										<u-td class="u-td">{{ item.i }}</u-td>
+										<u-td class="u-td">{{ item.real_time }}</u-td>
+										<u-td class="u-td">{{ item.ctime }}</u-td>
+									</u-tr>
+								</u-table>
+								<uni-pagination :show-icon="true" :total="totalPage" :current="currentPage"
+									@change="sectionChange" />
+							</u-collapse-item>
 		</ScrollTolower>
                     </view>
                 </template>
