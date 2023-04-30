@@ -223,6 +223,48 @@
 							</u-collapse-item>
 		</ScrollTolower>
                     </view>
+                    <!-- 添加设备 -->
+		<u-popup :show="newDevice.show" @close="newDeviceClose">
+			<view class="popup-box">
+				<view class="popup-title">添加设备：</view>
+				<u-line></u-line>
+
+				<view class="search-box">
+          <text class="search-title">设备类型</text>
+          <u-radio-group v-model="newDevice.type" placement="column" style="margin-top: 20rpx" size="34" @change="newDeviceTypeChange">
+            <u-radio :customStyle="{ margin: '8px' }" v-for="item in deviceType.slice(0,1)" :key="item.status" :label="item.name" :name="item.status"> </u-radio>
+          </u-radio-group>
+        </view>
+
+				<view class="search-box">
+					<text class="search-title">设备名称</text>
+					<u--input placeholder="请输入设备名称" maxlength="15" style="margin-top: 20rpx" border="surround"
+						v-model="newDevice.deviceName" />
+				</view>
+				<view class="search-box" v-if="newDevice.type !== '2'">
+					<text class="search-title">设备编号</text>
+					<u--input placeholder="请输入设备编号" maxlength="15" style="margin-top: 20rpx" border="surround"
+						v-model="newDevice.number" />
+				</view>
+				<view class="search-box" v-if="newDevice.type === '1'">
+					<text class="search-title">初始位置</text>
+					<u-radio-group v-model="newDevice.location" placement="column" style="margin-top: 10px" size="34">
+						<u-radio :customStyle="{ margin: '8px' }" v-for="(item, index) in locations" :key="index"
+							:label="item" :name="item"> </u-radio>
+					</u-radio-group>
+				</view>
+				<view class="search-box" v-if="newDevice.type == '1'">
+					<text class="search-title">电池编号</text>
+					<u--input placeholder="请输入电池编号" maxlength="15" style="margin-top: 20rpx" border="surround"
+						v-model="newDevice.batteryNumber" />
+				</view>
+				<view style="display: flex; margin-top: 20rpx">
+					<u-button style="width: 140rpx" plain type="warning" size="small"
+						@click="newDeviceClose">取消</u-button>
+					<u-button style="width: 140rpx" plain type="success" size="small" @click="addDevice">确认</u-button>
+				</view>
+			</view>
+		</u-popup>
                 </template>
                 <script name="deviceRecord">
                 import {
