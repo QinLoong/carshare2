@@ -1,4 +1,15 @@
 <template>
+  
+		<u-popup :round="20" :show="showPopUp" mode="center">
+			<view style="width: 300px;height: 150px;">
+				<u--input placeholder="请输入位置" border="surround" v-model="inputGps"
+					style="margin-top: 20px;margin-left: 10px; width: 260px;"></u--input>
+				<u-button style="width: 5px;margin-top: 30px;margin-left: 50px;height: 34px;" type="error" size="mini"
+					@click="showPopUp = false">关闭</u-button>
+				<u-button style="width: 5px;margin-top: -35px;margin-right: 50px;height: 34px;" type="success"
+					size="mini" @click="fixComfirm()">确定</u-button>
+			</view>
+		</u-popup>
 	<view class="device-record-container">
         <ScrollTolower ref="scrollTolowerRef" @request="findDeviceList" :loadmoreMarginTop="20"
 			:loadmoreMarginBottom="20" :loadSize="1000">
@@ -229,12 +240,12 @@
 				<view class="popup-title">添加设备：</view>
 				<u-line></u-line>
 
-				<view class="search-box">
+				<!-- <view class="search-box">
           <text class="search-title">设备类型</text>
           <u-radio-group v-model="newDevice.type" placement="column" style="margin-top: 20rpx" size="34" @change="newDeviceTypeChange">
             <u-radio :customStyle="{ margin: '8px' }" v-for="item in deviceType.slice(0,1)" :key="item.status" :label="item.name" :name="item.status"> </u-radio>
           </u-radio-group>
-        </view>
+        </view> -->
 
 				<view class="search-box">
 					<text class="search-title">设备名称</text>
