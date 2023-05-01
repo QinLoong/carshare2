@@ -274,6 +274,29 @@
 						@click="newDeviceClose">取消</u-button>
 					<u-button style="width: 140rpx" plain type="success" size="small" @click="addDevice">确认</u-button>
 				</view>
+                
+		<!-- 添加子设备 -->
+		<u-popup :show="subDevice.show" @close="subDeviceClose">
+      <view class="popup-box">
+        <view class="popup-title">添加子设备：</view>
+        <view>
+          <u-radio-group v-model="subDevice.value" borderBottom iconPlacement="right" placement="column" :size="34">
+            <u-radio
+              v-for="deviceRadio in deviceRadioList"
+              shape="square"
+              :key="deviceRadio.id + deviceRadio.type"
+              :name="`${deviceRadio.id},${deviceRadio.type}`"
+              :label="deviceRadio.number ? `${deviceRadio.device_name}（编号：${deviceRadio.number}）` : deviceRadio.device_name"
+              :customStyle="{ fontSize: '24px', padding: '12px' }"
+            ></u-radio>
+          </u-radio-group>
+        </view>
+        <view style="display: flex; margin-top: 20rpx">
+          <u-button style="width: 140rpx" plain type="warning" size="small" @click="subDeviceClose">取消</u-button>
+          <u-button style="width: 140rpx" plain type="success" size="small" @click="addSubDevice">确认</u-button>
+        </view>
+      </view>
+    </u-popup>
 			</view>
 		</u-popup>
                 </template>
