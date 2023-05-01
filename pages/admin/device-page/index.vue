@@ -350,5 +350,23 @@
 				openDevice: false
 			}
 		},
+        computed: {
+			// 子设备过滤
+			deviceRadioList() {
+				return this.deviceList.filter(i => i.type !== '1')
+			},
+			// 父设备过滤
+			filterDeviceList() {
+				return this.filterDevice.fn(this.deviceList)
+			},
+			allColumns() {
+				return [
+					[{
+						name: '全部',
+						status: 0
+					}, ...this.deviceType]
+				]
+			}
+		},
     }
 </script>
