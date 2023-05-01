@@ -327,6 +327,23 @@
                     },
                     data() {
                         return {
+                            fixTemp: '',
+				showPopUp: false,
+				inputGps: '',
+				bike1: {},
+				bike2: {},
+				battery1: {},
+				battery2: {},
+				listValue: [], // 存储分段器的选项
+				pageSize: 6, // 分页大小，每页显示的记录数
+				hasMore: false, // 是否还有更多数据
+				totalPage: 1,
+				currentPage: 1,
+				batteryList1: [],
+				batteryList2: [],
+				deviceType,
+				bikeStatus,
+				batteryStatus,
                             locations,
 				deviceList: [],
 				subDevice: {
@@ -369,6 +386,91 @@
 			}
 		},
         methods: {
+            dictDisplay,
+			async findDeviceList({
+				page,
+				size
+			}, handleRequest) {
+				try {
+					const res = await findDeviceList({
+						page,
+						size: 10000
+					})
+					if (res.code === 200) {
+						this.deviceList = handleRequest(res.data, res.data.length)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			reset() {
+				this.$refs.scrollTolowerRef.resetRequest()
+				this.findDirectiveList()
+				this.$nextTick(() => {
+					this.$refs.collapseRef.init()
+				})
+			},
+			async unbindDevice(parentId, subId, type) {
+				try {
+					const res = await unbindDevice({
+						parentId,
+						subId,
+						type
+					})
+					if (res.code === 200) {
+						this.$toast.success('解绑成功!')
+						this.reset()
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			geDictDisplay(device) {
+				return this.dictDisplay(device.type === '1' ? bikeStatus : batteryStatus, device.status)
+			},
+			subDeviceOpen(id) {
+				this.subDevice.show = true
+				this.subDevice.parentId = id
+			},
+			subDeviceClose() {
+				Object.assign(this.subDevice, this.$options.data.call(this).subDevice)
+			},
+			newDeviceOpen() {
+				this.newDevice.show = true
+			},
+			newDeviceClose() {
+				Object.assign(this.newDevice, this.$options.data.call(this).newDevice)
+			},
+			newDeviceTypeChange() {
+				Object.assign(this.newDevice, this.$options.data.call(this).newDevice, {
+					type: this.newDevice.type,
+					show: true
+				})
+			},
+			async addSubDevice() {
+				try {
+					if (!this.subDevice.value) this.$toast.error('请选择设备!')
+					const [subId, type] = this.subDevice.value.split(',')
+					const res = await addSubDevice({
+						parentId: this.subDevice.parentId,
+						subId,
+						type
+					})
+					if (res.code === 200) {
+						this.$toast.success('添加成功!')
+						this.subDevice.show = false
+						this.reset()
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
             async addDevice() {
 				const {
 					show,
