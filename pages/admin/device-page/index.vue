@@ -368,5 +368,69 @@
 				]
 			}
 		},
-    }
+        methods: {
+            async addDevice() {
+				const {
+					show,
+					...device
+				} = this.newDevice
+				try {
+					const res = await addBike(device)
+					if (res.code === 200) {
+						this.$toast.success('添加成功!')
+						this.newDevice.show = false
+						this.reset()
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			filterDeviceConfirm({
+				value
+			}) {
+				const {
+					status
+				} = value[0]
+				if (status == 0) this.filterDevice.fn = v => v
+				else {
+					this.filterDevice.fn = list => {
+						return list.filter(item => item.type == status)
+					}
+				}
+				this.filterDevice.show = false
+			},
+			async delBike(id) {
+				try {
+					const res = await delBike({
+						id
+					})
+					if (res.code === 200) {
+						this.$toast.success('成功!')
+						this.reset()
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			async findDirectiveList() {
+				try {
+					const res = await findDirectiveList()
+					if (res.code === 200) {
+						this.directiveList = res.data.records
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			}
+		}
+	}
+        
+
+    
 </script>
