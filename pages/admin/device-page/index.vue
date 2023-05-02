@@ -386,6 +386,38 @@
 			}
 		},
         methods: {
+            		// 更新分页器的当前页
+			sectionChange(index) {
+				// console.log(index);
+				this.currentPage = index.current;
+				// console.log('this.currentValue: ',this.currentValue);
+				// 每当分页器的当前页变化时，重新获取数据
+				this.findBatteryList()
+
+			},
+            		// 获取数据
+			findBatteryList() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/battery/findBatteryList',
+					method: 'POST',
+					data: {
+						page: this.currentPage,
+						size: this.pageSize
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						// const data = res.data;
+						this.batteryList1 = data.data.records || [];
+						// console.log(this.batteryList1);
+						// this.hasMore = data.hasMore || false;
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
             getAllBattery1() {
 				// 向后端请求数据
 				uni.request({
