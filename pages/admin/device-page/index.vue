@@ -386,6 +386,57 @@
 			}
 		},
         methods: {
+            open1(device) {
+				this.openDevice = true;
+				const d = device
+				this.controlDevice(d)
+			},
+			close1(device) {
+				this.openDevice = false;
+				const d = device
+				this.controlDevice(d)
+			},
+			controlDevice(device) {
+				const data1 = {
+					bike_number: device.number,
+					isopen: this.openDevice
+				}
+				uni.request({
+					url: this.$global.baseUrl + '/device/controlDevice',
+					method: 'POST',
+					data: data1,
+					success: (res) => {
+						console.log(res.data);
+					},
+					fail: (error) => {
+						console.error('无法开启自动控制:', error);
+					},
+				});
+			},
+			fixComfirm() {
+				const dataFix = {
+					id: this.fixTemp,
+					location: this.inputGps
+				};
+				console.log(dataFix);
+				uni.request({
+						url: this.$global.baseUrl + '/device/editDirective',
+						method: 'POST',
+						data: dataFix,
+						success: (res) => {
+							console.log(res);
+						},
+						fail: (error) => {
+							console.error('请求失败:', error);
+						},
+					}),
+					this.showPopUp = false;
+			},
+			fixGps(id) {
+				// console.log(id);
+				this.fixTemp = id;
+				this.showPopUp = true
+			},
             		// 更新分页器的当前页
 			sectionChange(index) {
 				// console.log(index);
