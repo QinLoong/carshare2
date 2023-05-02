@@ -386,6 +386,62 @@
 			}
 		},
         methods: {
+            getAllBattery1() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/battery/getAllBattery1',
+					method: 'GET',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						const data = res.data.data;
+						const total = Math.ceil(data.length / this.pageSize)
+						// console.log(total);
+						this.totalPage = total * 10
+						// console.log(this.totalPage);
+						this.listValue = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.listValue);
+						this.findBatteryList();
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			getBattery2() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/battery/getBattery2',
+					method: 'GET',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						const data = res.data.data;
+						this.battery1 = data[0]
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
+			getBattery3() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/battery/getBattery3',
+					method: 'GET',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						const data = res.data.data;
+						// console.log(data);
+						this.battery2 = data[0]
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
             dictDisplay,
 			async findDeviceList({
 				page,
