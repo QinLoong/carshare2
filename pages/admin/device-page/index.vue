@@ -385,6 +385,21 @@
 				]
 			}
 		},
+        mounted() {
+			this.getData1(),
+				this.getData2(),
+				this.getBattery2(),
+				this.getBattery3(),
+				this.findDirectiveList(),
+				this.getAllBattery1(),
+				setInterval(() => {
+					this.getData1(),
+						this.getData2(),
+						this.getAllBattery1(),
+						this.getBattery2(),
+						this.getBattery3()
+				}, 3000)
+		},
         methods: {
             open1(device) {
 				this.openDevice = true;
