@@ -690,3 +690,78 @@
 
     
 </script>
+<style lang="scss" scoped>
+	.device-record-container {
+		height: calc(100vh - 90rpx);
+
+		.device-title {
+			display: flex;
+			align-items: center;
+		}
+
+		.device-image {
+			width: 100%;
+			height: 300rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: linear-gradient($color1, $color2);
+
+			image {
+				padding: 30rpx;
+				width: 210rpx;
+				height: 70%;
+				margin: auto;
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 50%;
+			}
+		}
+
+		.info-box {
+			background-color: #fff;
+			border-radius: 10rpx;
+			padding: 20rpx;
+		}
+
+		.popup-box {
+			padding: 20rpx;
+			max-height: 70vh;
+			overflow: auto;
+		}
+
+		.popup-title {
+			font-weight: bold;
+			margin-bottom: 10rpx;
+		}
+
+		.search-box {
+			margin: 20rpx 10rpx;
+
+			.search-title {
+				color: gray;
+				font-size: 28rpx;
+			}
+
+			::v-deep {
+				.u-radio-group {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+				}
+			}
+		}
+
+		::v-deep {
+
+			.u-cell-group__title,
+			.u-collapse-item__content__text {
+				background: $app-background-grey;
+			}
+
+			.u-cell-group,
+			.u-collapse-item {
+				width: 100%;
+			}
+		}
+	}
+</style>
