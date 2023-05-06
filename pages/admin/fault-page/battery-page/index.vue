@@ -61,5 +61,43 @@
 				inputTime:'',
 				length:0
 			}
+			methods: {
+			async findUserList({
+				page,
+				size
+			}, handleRequest) {
+				try {
+					const res = await findUserList({
+						page,
+						size
+					})
+					if (res.code === 200) {
+						this.userList = handleRequest(res.data.records, res.data.total)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+			async deleteUser(id) {
+				try {
+					const res = await deleteUser({
+						id
+					})
+					if (res.code === 200) {
+						this.$toast.success('删除成功!')
+						setTimeout(() => {
+							this.$refs.scrollTolowerRef.resetRequest()
+						}, 200)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
+		}
+	}
 		},
 </script>
