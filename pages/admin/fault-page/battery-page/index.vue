@@ -98,6 +98,30 @@
 				}
 			},
 		}
-	}
+	}，
+	confirm2(e) {
+				this.inputTime = this.formatTimestampToCustomString(e.value),
+				this.findBatteryListByTime()
+				const time = this.formatTimestampToCustomString(e.value);
+				console.log(time);
+			     const data1= {
+					 ctime: time
+				 };
+				 uni.request({
+				 	url: this.$global.baseUrl + '/battery/getBatteryByTime',
+				 	method: 'POST',
+					data: data1,
+				 	success: (res) => {
+				 		this.batteryList = res.data.data;
+				 		console.log(this.batteryList);
+				 	},
+				 	fail: (error) => {
+				 		console.error('请求失败:', error);
+				 	},
+				 });
+				console.log(e );
+				this.show = false
+			
+			},
 		},
 </script>
