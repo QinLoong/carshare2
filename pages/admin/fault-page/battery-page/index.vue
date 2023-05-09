@@ -99,6 +99,46 @@
 			},
 		}
 	}，
+	sectionChange(index) {
+				// console.log(index);
+				this.currentPage = index.current;
+				// console.log('this.currentValue: ',this.currentValue);
+			   // 每当分页器的当前页变化时，重新获取数据
+			   this.findBatteryListByTime()
+			   
+			},
+	findBatteryListByTime() {
+				// console.log(this.inputTime);
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl+'/battery/findBatteryListByTime',
+					method: 'POST',
+					data: {
+						page: this.currentPage,
+						size: this.pageSize,
+						ctime: this.inputTime
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						this.batteryList = data.data.records || [];
+						const total = Math.ceil(data.data.total/this.pageSize) || 0
+						this.totalPage=total*10
+						this.length=data.data.total
+						// console.log(this.totalPage);
+						this.listValue = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.batteryList1);
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+				this.show = false
+			},
 	formatTimestampToCustomString(timestamp) {
 			  const date = new Date(timestamp);
 			  const year = date.getFullYear();
