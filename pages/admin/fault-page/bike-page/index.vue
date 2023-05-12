@@ -36,3 +36,28 @@
 		</ScrollTolower>
 	</view>
 </template>
+<script name="userRecord">
+	import {
+		findUserList,
+		deleteUser
+	} from '@/common/api/user.js'
+	export default {
+		data() {
+			return {
+				userList: [],
+				userId: this.$store.state.userInfo.id,
+				show: false,
+				value1: Number(new Date()),
+				bikeList: [],
+				listValue: [], // 存储分段器的选项
+				pageSize: 6, // 分页大小，每页显示的记录数
+				totalPage:1,
+				currentPage:1,
+				inputTime:'',
+				length:0
+			}
+		},
+		methods: {
+
+	}
+</script>
