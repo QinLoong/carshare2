@@ -58,6 +58,29 @@
 			}
 		},
 		methods: {
+            confirm2(e) {
+				
+				this.inputTime = this.formatTimestampToCustomString(e.value),
+				this.findData1ListByTime()
+			     const data1= {
+					 time: this.formatTimestampToCustomString(e.value)
+				 }
+				 uni.request({
+				 	url: this.$global.baseUrl + '/data1/getDataByTime',
+				 	method: 'POST',
+					data: data1,
+				 	success: (res) => {
+				 		this.bikeList = res.data.data;
+				 		console.log(this.bikeList);
+				 	},
+				 	fail: (error) => {
+				 		console.error('请求失败:', error);
+				 	},
+				 });
+				// console.log(e );
+				this.show = false
+			
+			},
             async findUserList({
 				page,
 				size
