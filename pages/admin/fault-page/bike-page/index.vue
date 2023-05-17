@@ -58,7 +58,48 @@
 			}
 		},
 		methods: {
-            formatTimestampToCustomString(timestamp) {
+          			// 更新分页器的当前页
+			sectionChange(index) {
+				// console.log(index);
+				this.currentPage = index.current;
+				// console.log('this.currentValue: ',this.currentValue);
+			   // 每当分页器的当前页变化时，重新获取数据
+			   this.findData1ListByTime()
+			   
+			},
+			findData1ListByTime() {
+				// console.log(this.inputTime);
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl+'/data1/findData1ListByTime',
+					method: 'POST',
+					data: {
+						page: this.currentPage,
+						size: this.pageSize,
+						time: this.inputTime
+					},
+					success: (res) => {
+						const data = res.data;
+						// console.log(data);
+						this.bikeList = data.data.records || [];
+						const total = Math.ceil(data.data.total/this.pageSize) || 0
+						this.totalPage=total*10
+						 this.length=data.data.total
+						// console.log(this.totalPage);
+						this.listValue = Array.from({
+							length: total
+						}, (v, k) => ({
+							name: `第${k + 1}页`,
+						}));
+						// console.log(this.batteryList1);
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+				this.show = false
+			},
+			formatTimestampToCustomString(timestamp) {
 			  const date = new Date(timestamp);
 			  const year = date.getFullYear();
 			  const month = date.getMonth() + 1; // 月份从0开始，需要加1
@@ -71,27 +112,27 @@
 			
 			  return formattedDate;
 			},
-            confirm2(e) {
+			confirm2(e) {
 				
 				this.inputTime = this.formatTimestampToCustomString(e.value),
 				this.findData1ListByTime()
-			     const data1= {
-					 time: this.formatTimestampToCustomString(e.value)
-				 }
-				 uni.request({
-				 	url: this.$global.baseUrl + '/data1/getDataByTime',
-				 	method: 'POST',
-					data: data1,
-				 	success: (res) => {
-				 		this.bikeList = res.data.data;
-				 		console.log(this.bikeList);
-				 	},
-				 	fail: (error) => {
-				 		console.error('请求失败:', error);
-				 	},
-				 });
-				// console.log(e );
-				this.show = false
+			 //     const data1= {
+				// 	 time: this.formatTimestampToCustomString(e.value)
+				//  }
+				//  uni.request({
+				//  	url: this.$global.baseUrl + '/data1/getDataByTime',
+				//  	method: 'POST',
+				// 	data: data1,
+				//  	success: (res) => {
+				//  		this.bikeList = res.data.data;
+				//  		console.log(this.bikeList);
+				//  	},
+				//  	fail: (error) => {
+				//  		console.error('请求失败:', error);
+				//  	},
+				//  });
+				// // console.log(e );
+				// this.show = false
 			
 			},
             async findUserList({
