@@ -38,3 +38,26 @@
 		</ScrollTolower>
 	</view>
 </template>
+<script name="userRecord">
+	import {
+		findUserList,
+		deleteUser
+	} from '@/common/api/user.js'
+	export default {
+		data() {
+			return {
+				userList: [],
+				userId: this.$store.state.userInfo.id,
+				show: false,
+				value1: Number(new Date()),
+				orderList: [],
+				inputValue: '',
+			}
+		},
+		mounted(){
+	
+		},
+		methods: {
+	
+	}
+</script>
