@@ -58,6 +58,24 @@
 	
 		},
 		methods: {
+            async findUserList({
+				page,
+				size
+			}, handleRequest) {
+				try {
+					const res = await findUserList({
+						page,
+						size
+					})
+					if (res.code === 200) {
+						this.userList = handleRequest(res.data.records, res.data.total)
+					} else {
+						this.$toast.error('请求失败!')
+					}
+				} catch (err) {
+					this.$toast.error(err)
+				}
+			},
             async deleteUser(id) {
 				try {
 					const res = await deleteUser({
