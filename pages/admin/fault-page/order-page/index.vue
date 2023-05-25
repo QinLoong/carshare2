@@ -58,6 +58,25 @@
 	
 		},
 		methods: {
+            confirm2(e) {
+			     const data1= {
+					 user_name: this.inputValue,
+					 bike_number: this.inputValue
+				 }
+				 uni.request({
+				 	url: this.$global.baseUrl + '/order1/getOrder1ByLimit',
+				 	method: 'POST',
+					data: data1,
+				 	success: (res) => {
+				 		this.orderList = res.data.data;
+				 		console.log(this.orderList);
+				 	},
+				 	fail: (error) => {
+				 		console.error('请求失败:', error);
+				 	},
+				 });
+			
+			},
             async findUserList({
 				page,
 				size
