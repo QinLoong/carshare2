@@ -55,9 +55,24 @@
 			}
 		},
 		mounted(){
-	
+            this.getAllOrder1()
 		},
 		methods: {
+            getAllOrder1() {
+				// 向后端请求数据
+				uni.request({
+					url: this.$global.baseUrl + '/order1/getAllOrder1',
+					method: 'POST',
+					success: (res) => {
+						// this.batteryList1 = res.data.data;
+						this.orderList = res.data.data;
+						// console.log(this.orderList);
+					},
+					fail: (error) => {
+						console.error('请求失败:', error);
+					},
+				});
+			},
             confirm2(e) {
 			     const data1= {
 					 user_name: this.inputValue,
