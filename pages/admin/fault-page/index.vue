@@ -20,3 +20,40 @@
       </ScrollTolower>
     </view>
   </template>
+  <script name="faultRecord">
+  import { findDataList } from '@/common/api/data.js'
+  import { vStatus, dataDisplay } from '@/common/utils/dict.js'
+  export default {
+    data() {
+      return {
+        vStatus,
+        faultList: [],
+        total: '-',
+        interval: null,
+        time: 5000,
+        cellList: [
+          {
+            icon: 'coupon',
+            title: '光照速度查询',
+            url: '/pages/admin/fault-page/bike-page/index'
+          },
+          {
+            icon: 'coupon',
+            title: '电池数据查询',
+            url: '/pages/admin/fault-page/battery-page/index'
+          },
+          {
+            icon: 'coupon',
+            title: '用户订单查询',
+            url: '/pages/admin/fault-page/order-page/index'
+          },
+          ]
+      }
+    },
+    mounted() {
+
+    },
+    methods: {
+
+  }
+  </script>
