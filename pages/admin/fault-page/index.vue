@@ -54,6 +54,26 @@
 
     },
     methods: {
-
+        async findFaultList({ page, size }, handleRequest) {
+      console.log('4. 故障实时数据更新---');
+      try {
+        const res = await findDataList({ page, size, type: '1' })
+        if (res.code === 200) {
+          this.total = res.data.total
+          const data = res.data.records.map(v => dataDisplay(v))
+          console.log(data);
+          this.faultList = handleRequest(data, res.data.total)
+        } else {
+          this.$toast.error('请求失败!')
+        }
+      } catch (err) {
+        this.$toast.error(err)
+      }
+    },
+  },
+  destroyed() {
+    // clearInterval(this.interval)
+    // this.interval = null
+  }
   }
   </script>
