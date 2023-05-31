@@ -54,6 +54,14 @@
 
     },
     methods: {
+        changeRoute(cell) {
+	    cell.before && cell.before()
+	    if (cell.fn) cell.fn()
+	    else
+	      uni.navigateTo({
+	        url: cell.url
+	      })
+	  },
         async findFaultList({ page, size }, handleRequest) {
       console.log('4. 故障实时数据更新---');
       try {
